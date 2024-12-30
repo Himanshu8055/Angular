@@ -1,24 +1,43 @@
-import { NgClass } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { RouterOutlet } from '@angular/router';
+
+interface Navigation{
+  href: string,
+  name: string
+}
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [NgClass, FormsModule],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  imports: [RouterOutlet, CommonModule],
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
   title = 'Angular-project';
-  isActive: boolean = true;
 
-  user: { name: string; password: string } = {
-    name: '',
-    password: ''
-  };
+  nav:Navigation [] = [
+    {
+      href: '/project1',
+      name: 'Project 1 - Calculator'
+    },
+    {
+      href: '/project2',
+      name: 'Project 2 - Weather'
+    },
+  ]
 
-  dataSubmit() {
-    console.log(this.user);
+  isVisible:boolean = false;
+
+
+
+
+  setVisible(){
+    if (this.isVisible) {
+      this.isVisible = !this.isVisible;
+    }
+    else{
+      this.isVisible = true;
+    }
   }
 }
